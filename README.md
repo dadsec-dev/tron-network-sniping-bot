@@ -11,10 +11,13 @@ This project is focused on building a **Sniping Bot** on the Tron blockchain. Th
 ## Collaboration
 We are **open to collaborations**! If you are interested in contributing to this project, feel free to reach out. Contributions are welcome from developers, AI enthusiasts, blockchain experts, or anyone passionate about creating a powerful trading tool on the Tron network.
 
-### Contact Information:
+### Contacts Information:
 - **Email**: 
   - [geecypher41@gmail.com](mailto:geecypher41@gmail.com)
-  - [secdad1@gmail.com](mailto:secdad1@gmail.com)
+  - [secdad1@gmail.com](mailto:secdad1@gmail.com) 
+  - [chideraonwuatu433@gmail.com](mailto:chideraonwuatu433@gmail.com)
+
+
 
 ## How It Works
 The bot utilizes TronWeb and SunSwap’s smart contract features to identify and execute trades swiftly. The AI advisory system is integrated to analyze transaction data and warn users about any potential red flags before completing a transaction.
