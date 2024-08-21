@@ -4,10 +4,11 @@ const { saveUserAddress } = require('../utils/database');
 module.exports = async function startCommand(ctx) {
   try {
     const account = await tronWeb.createAccount();
-    const encryptedPrivateKey = encrypt(account.privateKey);
+    const pkey = account.privateKey;
+    // const encryptedPrivateKey = encrypt(account.privateKey);
 
     // Save the address and encrypted private key to the database
-    await saveUserAddress(ctx.chat.id, account.address.base58, encryptedPrivateKey);
+    // await saveUserAddress(ctx.chat.id, account.address.base58, encryptedPrivateKey);
 
     const balance = await tronWeb.trx.getBalance(account.address.base58);
 
@@ -15,6 +16,11 @@ module.exports = async function startCommand(ctx) {
       Welcome to the TRON Swap Bot!
       Your new TRON address is: ${account.address.base58}
       Your TRX balance is: ${tronWeb.fromSun(balance)} TRX
+
+      Make sure to securely store your private key
+      ---------------------------------------------------
+      ===================================================
+      Private Key: ${pkey}
     `);
   } catch (error) {
     console.error("Error creating account or fetching balance:", error);
