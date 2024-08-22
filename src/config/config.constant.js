@@ -16,7 +16,10 @@ MESSAGES = {
         WALLET_FETCHED: "wallet successfully retreived",
         PRIVATE_KEY_FETCHED: "Private key successfully fetched",
         PRIVATE_KEY_NOT_FETCHED: "Unable to fetch private key",
-        
-
+    
     }
 }
+module.exports = {
+    USER: MESSAGES.USER,
+    DATABASE: MESSAGES.DATABASE
+};

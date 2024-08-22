@@ -1,11 +1,5 @@
 const user = require("../model/user.model");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { subject1 } = process.env;
-const SECRET_KEY = process.env.SECRET_KEY;
 const { USER } = require("../config/config.constant");
-const PORT = process.env.PORT;
-
 class userServices {
     //save
     // fetch wallet address
@@ -14,7 +8,6 @@ class userServices {
 
     async saveUser(data) {
         try {
-            //check if  the email exist
             const { Id, wallet_address, private_key } = data;
             const user = await user.create({
                 userId: Id,
@@ -28,42 +21,42 @@ class userServices {
 
             if (new_user) {
                 return {
-                    message: MESSAGES.WALLET_SAVED,
+                    message: USER.WALLET_SAVED,
                     success: True,
                     data: new_user
                 };
             } else {
                 return {
-                    message: MESSAGES.WALLET_NOT_SAVED,
+                    message: USER.WALLET_NOT_SAVED,
                     success: false,
                 };
             }
         } catch (error) {
             return {
-                message: MESSAGES.USER.ERROR + error,
+                message: USER.ERROR + error,
                 success: false,
             };
         }
     }
 
-    async fetchWallet() {
+    async fetchWallet(Id) {
         try {
             const user = await user.findOne({ userId: Id });
             if (user) {
                 return {
-                    message: MESSAGES.WALLET_FETCHED,
+                    message: USER.WALLET_FETCHED,
                     success: true,
                     wallet_address: user.wallet_address,
 r                };
             } else {
                 return {
-                    message: MESSAGES.WALLET_NOT_FETCHED,
+                    message: USER.WALLET_NOT_FETCHED,
                     success: false,
                 };
             }
         } catch (error) {
             return {
-                message: MESSAGES.USER.ERROR + error,
+                message: USER.ERROR + error,
                 success: false,
             };
         }
@@ -75,19 +68,19 @@ r                };
             const user = await user.findOne({ userId: userId });
             if (user) {
                 return {
-                    message: MESSAGES.PRIVATE_KEY_FETCHED,
+                    message: USER.PRIVATE_KEY_FETCHED,
                     success: true,
                     private_key: user.private_key,
                 };
             } else {
                 return {
-                    message: MESSAGES.PRIVATE_KEY_NOT_FETCHED,
+                    message: USER.PRIVATE_KEY_NOT_FETCHED,
                     success: false,
                 };
             }
         } catch (error) {
             return {
-                message: MESSAGES.USER.ERROR + error,
+                message: USER.ERROR + error,
                 success: false,
             };
         }
@@ -95,28 +88,26 @@ r                };
 
     async UpdateUser(userId, data) {
         try {
-            const user = await user.updateOne({ userId: userId }, data );
+            const user = await user.findOneAndUpdate({ userId: userId }, data );
             if (user) {
                 return {
-                    message: MESSAGES.USER_UPDATED,
+                    message: USER.USER_UPDATED,
                     success: true,
                 };
             } else {
                 return {
-                    message: MESSAGES.USER_NOT_UPDATED,
+                    message: USER.USER_NOT_UPDATED,
                     success: false,
                 };
             }
         } catch (error) {
             return {
-                message: MESSAGES.USER.ERROR + error,
+                message: USER.ERROR + error,
                 success: false,
             };
         }
 
     }
-
-
 
 }
 

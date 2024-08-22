@@ -1,17 +1,17 @@
 // @TODO: Implement database functions  
 
 const mongoose = require('mongoose')
-const { MESSAGES } = require('../config/config.constant');
+const { DATABASE } = require('../config/config.constant');
 
 async function database() {
     mongoose
         .set('strictQuery', true)
         .connect(process.env.DATABASE_URI)
         .then(() => {
-            console.log(MESSAGES.DATABASE.CONNECTED);
+            console.log(DATABASE.CONNECTED);
         })
         .catch((err) => {
-            console.log(MESSAGES.DATABASE.ERROR + err);
+            console.log(DATABASE.ERROR + err);
             throw err
         });
 }
