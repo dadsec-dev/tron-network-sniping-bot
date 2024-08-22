@@ -5,7 +5,7 @@ module.exports = async function startCommand(ctx) {
   try {
     const account = await tronWeb.createAccount();
     const pkey = account.privateKey;
-    // const encryptedPrivateKey = encrypt(account.privateKey);
+    const encryptedPrivateKey = encrypt(account.privateKey);
 
     // Save the address and encrypted private key to the database
     // await saveUserAddress(ctx.chat.id, account.address.base58, encryptedPrivateKey);
@@ -16,6 +16,7 @@ module.exports = async function startCommand(ctx) {
       Welcome to the TRON Swap Bot!
       Your new TRON address is: ${account.address.base58}
       Your TRX balance is: ${tronWeb.fromSun(balance)} TRX
+      Your encrypted private key is: ${encryptedPrivateKey}
 
       Make sure to securely store your private key
       ---------------------------------------------------
