@@ -48,7 +48,7 @@ class userServices {
                 return {
                     message: USER.WALLET_FETCHED,
                     success: true,
-                    wallet_address: user.wallet_address,
+                    wallet_address: getUser.wallet_address,
 r                };
             } else {
                 return {
@@ -72,7 +72,7 @@ r                };
                 return {
                     message: USER.PRIVATE_KEY_FETCHED,
                     success: true,
-                    encryptedPrivateKey: user.encryptedPrivateKey,
+                    encryptedPrivateKey: fetch_user.encryptedPrivateKey,
                 };
             } else {
                 return {
