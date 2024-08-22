@@ -11,20 +11,20 @@ class userServices {
         try {
             const { id, wallet_address, encryptedPrivateKey } = data;
 
-            const user = await user.create({
+            const save = await user.create({
                 userId: id,
                 wallet_address: wallet_address,
                 encryptedPrivateKey: encryptedPrivateKey
             });
 
             let new_user = user.findOne({
-                userId: user.userId
+                userId: save.userId
             })
 
             if (new_user) {
                 return {
                     message: USER.WALLET_SAVED,
-                    success: True,
+                    success: true,
                     data: new_user
                 };
             } else {
@@ -41,10 +41,10 @@ class userServices {
         }
     }
 
-    async fetchWallet(Id) {
+    async fetchWallet(id) {
         try {
-            const user = await user.findOne({ userId: Id });
-            if (user) {
+            const getUser = await user.findOne({ userId: id });
+            if (getUser) {
                 return {
                     message: USER.WALLET_FETCHED,
                     success: true,
@@ -65,10 +65,10 @@ r                };
     }
 
 
-    async fetch_Private_key(userId) {
+    async fetch_Private_key(id) {
         try {
-            const user = await user.findOne({ userId: userId });
-            if (user) {
+            const fetch_user = await user.findOne({ userId: id });
+            if (fetch_user) {
                 return {
                     message: USER.PRIVATE_KEY_FETCHED,
                     success: true,
@@ -88,10 +88,10 @@ r                };
         }
     }
 
-    async UpdateUser(userId, data) {
+    async UpdateUser(id, data) {
         try {
-            const user = await user.findOneAndUpdate({ userId: userId }, data );
-            if (user) {
+            const fetch_user = await user.findOneAndUpdate({ userId: id }, data );
+            if (fetch_user) {
                 return {
                     message: USER.USER_UPDATED,
                     success: true,
