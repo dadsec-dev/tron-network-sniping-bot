@@ -7,7 +7,7 @@ const {
     fetchWallet,
     fetch_Private_key,
     UpdateUser,
-} = userServices()
+} = userServices
 
 module.exports = async function startCommand(ctx) {
   try {
@@ -28,7 +28,7 @@ module.exports = async function startCommand(ctx) {
       Your TRX balance is: ${tronWeb.fromSun(balance)} TRX
       Your encrypted private key is: ${encryptedPrivateKey}
 
-      Make sure to securely store your private key
+      Make sure to securely store your private keymong
       ---------------------------------------------------
       ===================================================
       Private Key: ${pkey}
