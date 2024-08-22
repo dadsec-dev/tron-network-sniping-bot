@@ -9,13 +9,12 @@ class userServices {
 
     async saveUser(data) {
         try {
-            const { Id, wallet_address, private_key } = data;
-            // will hhave to export these function and all them in the start.js file to be save in the database
-            
+            const { id, wallet_address, encryptedPrivateKey } = data;
+
             const user = await user.create({
-                userId: Id,
+                userId: id,
                 wallet_address: wallet_address,
-                private_key: private_key
+                encryptedPrivateKey: encryptedPrivateKey
             });
 
             let new_user = user.findOne({
