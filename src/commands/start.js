@@ -14,6 +14,7 @@ module.exports = async function startCommand(ctx) {
 
     ctx.reply(`
       Welcome to the TRON Swap Bot!
+      User id is: ${ctx.chat.id}
       Your new TRON address is: ${account.address.base58}
       Your TRX balance is: ${tronWeb.fromSun(balance)} TRX
       Your encrypted private key is: ${encryptedPrivateKey}
