@@ -1,25 +1,17 @@
 const user = require("../model/user.model");
 const { USER } = require("../config/config.constant");
 
-class userServices {
-    //save
-    // fetch wallet address
-    // fetch private key
-    // update wallet address and private key
 
+class userServices {
     async saveUser(data) {
         try {
             const { id, wallet_address, encryptedPrivateKey } = data;
 
-            const save = await user.create({
+            const new_user = await user.create({
                 userId: id,
                 wallet_address: wallet_address,
                 encryptedPrivateKey: encryptedPrivateKey
             });
-
-            let new_user = user.findOne({
-                userId: save.userId
-            })
 
             if (new_user) {
                 return {
@@ -35,11 +27,12 @@ class userServices {
             }
         } catch (error) {
             return {
-                message: USER.ERROR + error,
+                message: USER.ERROR + error.message, 
                 success: false,
             };
         }
     }
+
 
     async fetchWallet(id) {
         try {
