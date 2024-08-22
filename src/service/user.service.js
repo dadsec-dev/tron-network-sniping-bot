@@ -42,7 +42,7 @@ class userServices {
                     message: USER.WALLET_FETCHED,
                     success: true,
                     wallet_address: getUser.wallet_address,
-r                };
+                };
             } else {
                 return {
                     message: USER.WALLET_NOT_FETCHED,

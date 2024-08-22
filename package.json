@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "@noble/secp256k1": "^1.7.1",
+    "axios": "^1.7.4",
     "bcrypt": "^5.1.1",
     "dotenv": "^16.4.5",
     "jsonwebtoken": "^9.0.2",
