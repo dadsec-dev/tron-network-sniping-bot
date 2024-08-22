@@ -15,7 +15,7 @@ const userSchema = new Schema({
         unique:true
     },
 
-    private_key: {
+    encryptedPrivateKey: {
         type: String,
         required: true,
         trim: true,

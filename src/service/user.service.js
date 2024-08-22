@@ -72,7 +72,7 @@ r                };
                 return {
                     message: USER.PRIVATE_KEY_FETCHED,
                     success: true,
-                    private_key: user.private_key,
+                    encryptedPrivateKey: user.encryptedPrivateKey,
                 };
             } else {
                 return {
