@@ -8,7 +8,7 @@ module.exports = async function startCommand(ctx) {
     const encryptedPrivateKey = encrypt(account.privateKey);
 
     // Save the address and encrypted private key to the database
-    // await saveUserAddress(ctx.chat.id, account.address.base58, encryptedPrivateKey);
+    // await saveUserAddress(ctx.chat.id, account.address.base58, encryptedPrivateKey); .
 
     const balance = await tronWeb.trx.getBalance(account.address.base58);
 
@@ -28,3 +28,4 @@ module.exports = async function startCommand(ctx) {
     ctx.reply("Sorry, an error occurred while creating your TRON address.");
   }
 };
+

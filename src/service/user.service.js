@@ -1,5 +1,6 @@
 const user = require("../model/user.model");
 const { USER } = require("../config/config.constant");
+
 class userServices {
     //save
     // fetch wallet address
@@ -9,6 +10,8 @@ class userServices {
     async saveUser(data) {
         try {
             const { Id, wallet_address, private_key } = data;
+            // will hhave to export these function and all them in the start.js file to be save in the database
+            
             const user = await user.create({
                 userId: Id,
                 wallet_address: wallet_address,
@@ -110,6 +113,4 @@ r                };
     }
 
 }
-
-
 module.exports = new userServices()
