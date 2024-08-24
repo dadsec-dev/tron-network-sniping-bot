@@ -53,7 +53,7 @@ module.exports = async function balanceCommand(ctx) {
 
     const balance = await tronWeb.trx.getBalance(address);
     ctx.reply(`Your TRX balance is: ${tronWeb.fromSun(balance)} TRX`);
-    //@todo implement a function to get the balance of all trc20 tokens by an address
+
     const trc20Balance = await getTRC20Balance(address);
     ctx.reply(`${trc20Balance} `);
   } catch (error) {
