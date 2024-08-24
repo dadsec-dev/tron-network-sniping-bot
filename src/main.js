@@ -1,31 +1,47 @@
 const { Telegraf } = require('telegraf');
 const { getUserAddress } = require('./utils/database');
 const { startCommand, balanceCommand, swapTokens } = require('./commands');
+const {fetchWallet} = require('../src/service/user.service');
+const  databaseConnect  = require('./utils/database');
+// const { connect } = require('mongoose');
 
 const botToken = process.env.BOT_TOKEN;
-const bot = new Telegraf(botToken);
-
-bot.start(startCommand);
-
-bot.command('balance', balanceCommand);
-
-// bot.command('swap', swapTokens);
-bot.command('swap', async (ctx) => {
-    console.log('swap command called');
-    const address = await getUserAddress(ctx.chat.id);
-    const fromToken = 'TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t'; // USDT
-    const toToken = 'TEkxiTehnzSmSe2XqrBj4w32RUN966rdz8';   // USDC
-    const amount = '10000000';
-    const recipient = address; 
-    
-    swapTokens(ctx, fromToken, toToken, amount, recipient);
-  });
-
-bot.launch();
+// const bot = new Telegraf(botToken);
 
 
-console.log('Bot is running...');
 
-// bot.launch(startCommand);
+(async () => {
+  try {
+    await databaseConnect();  
+    console.log('Database connected successfully');
 
-// bot.launch(startCommand);
+    const bot = new Telegraf(botToken);
+
+    bot.start(startCommand);
+
+    bot.command('balance', balanceCommand);
+
+    bot.command('swap', async (ctx) => {
+      console.log('swap command called');
+      console.log('Connecting to the db and getting the user wallet');
+
+      const walletResult = await fetchWallet(ctx.chat.id);
+      const address = walletResult.success ? walletResult.wallet_address : null;
+
+      console.log(`Recipient address is ${address}`);
+
+      const fromToken = 'TNUC9Qb1rRpS5CbWLmNMxXBjyFoydXjWFR'; // WTRX
+      const toToken = 'TXL6rJbvmjD46zeN1JssfgxvSo99qC8MRT';   // SUN
+      const amount = '10';
+
+      swapTokens(ctx, fromToken, toToken, amount, address);
+    });
+
+    bot.launch();
+    console.log('Bot is running...');
+
+  } catch (error) {
+    console.error('Failed to connect to the database:', error);
+    process.exit(1);  
+  }
+})();

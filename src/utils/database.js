@@ -1,9 +1,8 @@
-// @TODO: Implement database functions  
 
 const mongoose = require('mongoose')
 const { DATABASE } = require('../config/config.constant');
 
-async function database() {
+async function databaseConnect() {
     mongoose
         .set('strictQuery', true)
         .connect(process.env.DATABASE_URI)
@@ -15,4 +14,4 @@ async function database() {
             throw err
         });
 }
-module.exports = database
+module.exports = databaseConnect
