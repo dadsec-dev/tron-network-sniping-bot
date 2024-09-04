@@ -28,7 +28,7 @@ module.exports = async function swapTokens(ctx, fromToken, toToken, amount, reci
     const bestPath = await getBestPath(fromToken, toToken, amount);
     
     const routerContractAddress = 'TFVisXFaijZfeyeSjCEVkHfex7HGdTxzF9'; 
-    const contract = await tronWeb.contract().at(routerContractAddress);
+    const contract = await tronWeb.getContract(routerContractAddress)
     console.log(`contract address is: ${contract.account}`)
 
     
