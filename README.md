@@ -13,7 +13,7 @@ This project is a Sniping Bot for the Tron blockchain, designed to allow users t
 - Node.js
 - MongoDB
 - Tron API Key
-- Telegram Bot Token
+- Telegram Bot Token id
 
 ## Installation
 1. Clone the repository
