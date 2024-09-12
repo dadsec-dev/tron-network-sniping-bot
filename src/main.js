@@ -1,14 +1,13 @@
 const { Telegraf } = require('telegraf');
 const { getUserAddress } = require('./utils/database');
-const { startCommand, balanceCommand, swapTokens } = require('./commands');
+const { startCommand, balanceCommand, swapTokens, transferTRX } = require('./commands');
 const {fetchWallet} = require('../src/service/user.service');
 const  databaseConnect  = require('./utils/database');
 // const { connect } = require('mongoose');
+// const transferTRX = require('./commands/transfer');
 
 const botToken = process.env.BOT_TOKEN;
 // const bot = new Telegraf(botToken);
-
-
 
 (async () => {
   try {
@@ -35,6 +34,19 @@ const botToken = process.env.BOT_TOKEN;
       const amount = '10';
 
       swapTokens(ctx, fromToken, toToken, amount, address);
+    });
+
+    bot.command('transfer', async (ctx) => {
+      const args = ctx.message.text.split(' ');
+      if (args.length !== 3) {
+        return ctx.reply('Usage: /transfer <toAddress> <amount>');
+      }
+      const toAddress = args[1];
+      const amount = parseFloat(args[2]);
+      if (isNaN(amount) || amount <= 0) {
+        return ctx.reply('Please provide a valid positive number for the amount.');
+      }
+      await transferTRX(ctx, toAddress, amount);
     });
 
     bot.launch();
